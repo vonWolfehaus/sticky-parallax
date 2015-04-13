@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+		<title>Parallax</title>
+
+		<meta name="author" content="Corey Birnbaum" />
+		<meta name="description" content="" />
+
+		<link rel="stylesheet" type="text/css" href="normalize.css" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+
+	<body>
+		<br>
+		<span class="parallaxed" data-height="500" data-speed="1.3" data-src="./img/mtn3.jpg"></span>
+		
+		<header>
+			<h1>Sticky Nav and Parallax</h1>
+			
+			<nav>
+				<a class="btn" href="#">Home</a>
+				<a class="btn" href="#">About</a>
+				<a class="btn" href="#">Contact</a>
+			</nav>
+		</header>
+		
+		<div class="container">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+		
+		<span class="parallaxed block" data-height="400" data-speed="0.5" data-src="./img/mtn2.jpg"></span>
+		
+		<div class="container">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+		
+		<span class="parallaxed block" data-height="400" data-speed="0.3" data-src="./img/mtn1.jpg"></span>
+		
+		<div class="container">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+		
+		<span class="block"></span>
+		<span class="fixed-background"></span>
+		
+		<div class="container">
+			Footer.
+		</div>
+		
+		<script type="text/javascript" src="js/Parallax.js"></script>
+		<script type="text/javascript">
+			window.addEventListener('load', function(evt) {
+
+				var nav = document.getElementsByTagName('nav')[0];
+				var triggerTop = nav.offsetTop;
+				
+				var elements = document.getElementsByClassName('parallaxed');
+				var parallaxed = [];
+				
+				for (var i = elements.length; i > 0; i--) {
+					parallaxed.push(new Parallax(elements[i-1]));
+				}
+				
+				function update() {
+					// sticky nav
+					var top = window.pageYOffset === undefined ? document.documentElement.scrollTop : window.pageYOffset;
+					if (top > triggerTop) {
+						nav.classList.add('stick-to-top');
+					}
+					else {
+						nav.classList.remove('stick-to-top');
+					}
+					
+					// parallaxed elements
+					for (i = 0; i < parallaxed.length; i++) {
+						parallaxed[i].update(top);
+					}
+					
+					requestAnimationFrame(update);
+				}
+				
+				update();
+			});
+		</script>
+	</body>
+</html>

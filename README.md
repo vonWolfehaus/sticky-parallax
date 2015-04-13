@@ -1,2 +1,1 @@
-# sticky-parallax
-Sticky navbar and parallaxed backgrounds
+A bit late to the party, but it's always good to exercise my moves.
